@@ -18,7 +18,7 @@ export const createEvent = async (req: AuthenticatedRequest, res: Response) => {
     const newEvent = new Event({
       description,
       dayOfWeek,
-      userId,
+      userId
     });
 
     await newEvent.save();
@@ -73,7 +73,9 @@ export const updateEvent = async (req: AuthenticatedRequest, res: Response) => {
     const eventId = req.params.id;
     const updates = req.body;
 
-    const event = await Event.findByIdAndUpdate(eventId, updates, { new: true }).select('_id description dayOfWeek userId');
+    const event = await Event.findByIdAndUpdate(eventId, updates, { new: true }).select(
+      '_id description dayOfWeek userId'
+    );
 
     if (!event) {
       return res.status(404).json({ message: 'Event not found' });
